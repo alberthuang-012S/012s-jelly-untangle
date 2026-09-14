@@ -358,6 +358,15 @@ button:focus-visible {
   color: #a8dce8;
 }
 
+.home-choice-layout {
+  display: grid;
+  grid-template-columns: 178px minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  width: min(1090px, 100%);
+  margin: 0 auto;
+}
+
 .tutorial-launch {
   position: relative;
   z-index: 1;
@@ -376,6 +385,14 @@ button:focus-visible {
   transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
+.tutorial-launch--compact {
+  width: 178px;
+  min-height: 62px;
+  margin: 0;
+  padding: 9px 11px;
+  gap: 8px;
+}
+
 .tutorial-launch:hover {
   border-color: rgba(231, 172, 47, 0.65);
   box-shadow: 0 10px 25px rgba(226, 173, 57, 0.12);
@@ -392,6 +409,13 @@ button:focus-visible {
   color: #dfa431;
 }
 
+.tutorial-launch--compact .tutorial-launch__icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
 .tutorial-launch__copy {
   display: flex;
   flex: 1;
@@ -405,16 +429,29 @@ button:focus-visible {
   font-weight: 900;
 }
 
+.tutorial-launch--compact .tutorial-launch__copy strong {
+  font-size: 0.72rem;
+}
+
 .tutorial-launch__copy small {
   color: #b39a63;
   font-size: 0.64rem;
   font-weight: 700;
 }
 
+.tutorial-launch--compact .tutorial-launch__copy small {
+  font-size: 0.56rem;
+  white-space: nowrap;
+}
+
 .tutorial-launch__arrow {
   color: #dca32b;
   font-size: 1rem;
   font-weight: 900;
+}
+
+.tutorial-launch--compact .tutorial-launch__arrow {
+  font-size: 0.88rem;
 }
 
 .game-shell {
@@ -1121,6 +1158,16 @@ button:focus-visible {
   .difficulty-grid {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .home-choice-layout {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .tutorial-launch--compact {
+    width: min(220px, 100%);
+    margin: 0 auto;
   }
 
   .difficulty-card {

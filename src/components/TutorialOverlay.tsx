@@ -11,7 +11,7 @@ export function TutorialOverlay({ complete, onContinue }: TutorialOverlayProps) 
         <p className="tutorial-message__eyebrow">FIRST TANGLE SOLVED</p>
         <h2>做得好！</h2>
         <p>所有交叉都解開了。</p>
-        <button className="primary-button" type="button" onClick={onContinue}>開始第一題</button>
+        <button className="primary-button" type="button" onClick={onContinue}>回到首頁</button>
       </div>
     )
   }

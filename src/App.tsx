@@ -35,16 +35,20 @@ function HomeScreen({
         <span className="hero-jelly__spark hero-jelly__spark--one">✦</span>
         <span className="hero-jelly__spark hero-jelly__spark--two">✧</span>
       </div>
-      <DifficultySelect onSelect={onSelect} />
-      <p className="home-footnote"><span aria-hidden="true">○</span> 所有交叉消失即可過關</p>
-      <button className="tutorial-launch" type="button" onClick={onTutorial}>
-        <span className="tutorial-launch__icon" aria-hidden="true">✦</span>
-        <span className="tutorial-launch__copy">
-          <strong>教學關卡</strong>
-          <small>先學會看懂交叉線</small>
-        </span>
-        <span className="tutorial-launch__arrow" aria-hidden="true">→</span>
-      </button>
+      <div className="home-choice-layout">
+        <button className="tutorial-launch tutorial-launch--compact" type="button" onClick={onTutorial}>
+          <span className="tutorial-launch__icon" aria-hidden="true">✦</span>
+          <span className="tutorial-launch__copy">
+            <strong>教學關卡</strong>
+            <small>先學會看懂交叉線</small>
+          </span>
+          <span className="tutorial-launch__arrow" aria-hidden="true">→</span>
+        </button>
+        <div>
+          <DifficultySelect onSelect={onSelect} />
+          <p className="home-footnote"><span aria-hidden="true">○</span> 所有交叉消失即可過關</p>
+        </div>
+      </div>
     </main>
   )
 }
@@ -114,12 +118,12 @@ export default function App() {
     setWinVisible(false)
   }
 
-  const continueFromTutorial = () => {
+  const finishTutorial = () => {
     markTutorialComplete()
+    setScreen('home')
     setTutorialMode(false)
     setTutorialComplete(false)
     setWinVisible(false)
-    startNewGame('basic')
   }
 
   const restartCurrentGame = () => {
@@ -173,8 +177,8 @@ export default function App() {
               void nodeId
             }}
           />
-          {tutorialMode && !tutorialComplete && <TutorialOverlay complete={false} onContinue={continueFromTutorial} />}
-          {isTutorialWin && <TutorialOverlay complete onContinue={continueFromTutorial} />}
+          {tutorialMode && !tutorialComplete && <TutorialOverlay complete={false} onContinue={finishTutorial} />}
+          {isTutorialWin && <TutorialOverlay complete onContinue={finishTutorial} />}
         </div>
         <p className="game-tip"><span aria-hidden="true">✦</span> 讓所有線段不再交叉，就能解開這一題</p>
         <Controls
