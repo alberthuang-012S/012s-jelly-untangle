@@ -25,7 +25,6 @@ export function DifficultySelect({ onSelect, onTutorial }: DifficultySelectProps
           <span className="tutorial-launch__copy">
             <strong>教學關卡</strong>
           </span>
-          <span className="tutorial-launch__arrow" aria-hidden="true">→</span>
         </button>
         <div className="difficulty-heading-copy">
           <div className="section-kicker">CHOOSE YOUR TANGLE</div>
@@ -52,7 +51,6 @@ export function DifficultySelect({ onSelect, onTutorial }: DifficultySelectProps
                 <span>{config.nodeCount} Jelly · {config.edgeCount} 線</span>
                 <span>{config.estimatedTime}</span>
               </span>
-              <span className="difficulty-card__arrow" aria-hidden="true">→</span>
             </button>
           )
         })}

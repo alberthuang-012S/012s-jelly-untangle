@@ -19,7 +19,7 @@ export function WinModal({ difficulty, moves, onNext, onReplay }: WinModalProps)
         <p className="win-modal__copy">所有能量線都整理完成</p>
         <p className="win-modal__stats">{difficulty === 'basic' ? '基礎' : difficulty === 'normal' ? '普通' : '挑戰'} · {moves} 次移動</p>
         <div className="win-modal__actions">
-          <button className="primary-button" type="button" onClick={onNext}>下一題 <span aria-hidden="true">→</span></button>
+          <button className="primary-button" type="button" onClick={onNext}>下一題</button>
           <button className="secondary-button" type="button" onClick={onReplay}>再玩一次</button>
         </div>
       </div>

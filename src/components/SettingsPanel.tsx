@@ -21,7 +21,7 @@ export function SettingsPanel({ currentDifficulty, onSelectDifficulty, onHome }:
             onClick={() => onSelectDifficulty(difficulty)}
           >
             <span>{difficulty === 'basic' ? '基礎' : difficulty === 'normal' ? '普通' : '挑戰'}</span>
-            <span aria-hidden="true">{currentDifficulty === difficulty ? '✓' : '→'}</span>
+            {currentDifficulty === difficulty && <span aria-hidden="true">✓</span>}
           </button>
         ))}
       </div>

@@ -340,20 +340,6 @@ button:focus-visible {
   font-weight: 700;
 }
 
-.difficulty-card__arrow {
-  position: absolute;
-  right: 17px;
-  bottom: 15px;
-  color: var(--sky);
-  font-size: 1.05rem;
-  font-weight: 900;
-  transition: transform 180ms ease;
-}
-
-.difficulty-card:hover .difficulty-card__arrow {
-  transform: translateX(4px);
-}
-
 .home-footnote {
   position: relative;
   z-index: 1;
@@ -444,16 +430,6 @@ button:focus-visible {
   color: #b39a63;
   font-size: 0.64rem;
   font-weight: 700;
-}
-
-.tutorial-launch__arrow {
-  color: #dca32b;
-  font-size: 1rem;
-  font-weight: 900;
-}
-
-.tutorial-launch--heading .tutorial-launch__arrow {
-  font-size: 0.88rem;
 }
 
 .game-shell {
@@ -1192,10 +1168,6 @@ button:focus-visible {
     font-size: 0.66rem;
   }
 
-  .tutorial-launch--heading .tutorial-launch__arrow {
-    font-size: 0.76rem;
-  }
-
   .difficulty-card {
     min-height: 104px;
     grid-template-columns: auto 1fr auto;
@@ -1214,17 +1186,6 @@ button:focus-visible {
   .difficulty-card__meta {
     grid-column: 2;
     margin-top: 7px;
-  }
-
-  .difficulty-card__arrow {
-    top: 50%;
-    right: 16px;
-    bottom: auto;
-    transform: translateY(-50%);
-  }
-
-  .difficulty-card:hover .difficulty-card__arrow {
-    transform: translate(4px, -50%);
   }
 
   .app-header {
