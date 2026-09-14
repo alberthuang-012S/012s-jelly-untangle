@@ -163,6 +163,10 @@ export function createTutorialLevel(): Level {
     edges,
     initialPositions,
     solutionPositions,
+    initialHint: {
+      nodeId: 'demo-1',
+      position: { ...solutionPositions['demo-1'] },
+    },
     initialCrossings: analyzeCrossings(edges, initialPositions).count,
     generationAttempts: 1,
   }

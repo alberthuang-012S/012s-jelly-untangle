@@ -12,7 +12,13 @@ import { useGameState } from './hooks/useGameState'
 import { isTutorialComplete, markTutorialComplete } from './storage/tutorial'
 import type { Difficulty } from './types/game'
 
-function HomeScreen({ onSelect }: { onSelect: (difficulty: Difficulty) => void }) {
+function HomeScreen({
+  onSelect,
+  onTutorial,
+}: {
+  onSelect: (difficulty: Difficulty) => void
+  onTutorial: () => void
+}) {
   return (
     <main className="home-screen">
       <div className="home-orbit home-orbit--one" aria-hidden="true" />
@@ -31,6 +37,14 @@ function HomeScreen({ onSelect }: { onSelect: (difficulty: Difficulty) => void }
       </div>
       <DifficultySelect onSelect={onSelect} />
       <p className="home-footnote"><span aria-hidden="true">○</span> 所有交叉消失即可過關</p>
+      <button className="tutorial-launch" type="button" onClick={onTutorial}>
+        <span className="tutorial-launch__icon" aria-hidden="true">✦</span>
+        <span className="tutorial-launch__copy">
+          <strong>教學關卡</strong>
+          <small>先學會看懂交叉線</small>
+        </span>
+        <span className="tutorial-launch__arrow" aria-hidden="true">→</span>
+      </button>
     </main>
   )
 }
@@ -82,6 +96,16 @@ export default function App() {
     }
   }
 
+  const startTutorial = () => {
+    setDifficulty('basic')
+    setScreen('game')
+    setSettingsOpen(false)
+    setTutorialMode(true)
+    setTutorialComplete(false)
+    setWinVisible(false)
+    loadLevel(createTutorialLevel())
+  }
+
   const backToHome = () => {
     setScreen('home')
     setSettingsOpen(false)
@@ -110,7 +134,7 @@ export default function App() {
   }
 
   if (screen === 'home') {
-    return <HomeScreen onSelect={startDifficulty} />
+    return <HomeScreen onSelect={startDifficulty} onTutorial={startTutorial} />
   }
 
   if (!game) return null

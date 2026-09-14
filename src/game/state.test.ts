@@ -3,6 +3,12 @@ import { createTutorialLevel } from './generator'
 import { commitGameNodeMove, createGameState, undoLastMove } from './state'
 
 describe('game state transitions', () => {
+  it('starts the tutorial with one clear suggested Jelly and Ghost Position', () => {
+    const game = createGameState(createTutorialLevel())
+    expect(game.hint?.nodeId).toBe('demo-1')
+    expect(game.hint?.position).toEqual({ x: 85, y: 20 })
+  })
+
   it('records one undo entry per completed move and restores the prior position', () => {
     const game = createGameState(createTutorialLevel())
     const from = game.positions['demo-1']

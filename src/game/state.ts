@@ -29,7 +29,10 @@ export function createGameState(level: Level): GameState {
     crossingEdges: analysis.crossingEdges,
     moveHistory: [],
     status: analysis.count === 0 ? 'won' : 'playing',
-    hint: null,
+    hint: level.initialHint ? {
+      nodeId: level.initialHint.nodeId,
+      position: { ...level.initialHint.position },
+    } : null,
   }
 }
 

@@ -358,6 +358,65 @@ button:focus-visible {
   color: #a8dce8;
 }
 
+.tutorial-launch {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: min(290px, 100%);
+  margin: 16px auto 0;
+  padding: 10px 14px;
+  border: 1px solid rgba(245, 198, 93, 0.35);
+  border-radius: 15px;
+  background: rgba(255, 252, 241, 0.82);
+  color: #aa822b;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.tutorial-launch:hover {
+  border-color: rgba(231, 172, 47, 0.65);
+  box-shadow: 0 10px 25px rgba(226, 173, 57, 0.12);
+  transform: translateY(-2px);
+}
+
+.tutorial-launch__icon {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 10px;
+  background: #fff1c9;
+  color: #dfa431;
+}
+
+.tutorial-launch__copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.tutorial-launch__copy strong {
+  color: #826425;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.tutorial-launch__copy small {
+  color: #b39a63;
+  font-size: 0.64rem;
+  font-weight: 700;
+}
+
+.tutorial-launch__arrow {
+  color: #dca32b;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
 .game-shell {
   position: relative;
   width: min(1320px, 100%);
@@ -830,6 +889,9 @@ button:focus-visible {
 
 .tutorial-message--guide {
   pointer-events: none;
+  left: 18px;
+  text-align: left;
+  transform: none;
 }
 
 .tutorial-message--complete {

@@ -34,6 +34,7 @@ export type Level = {
   edges: Edge[]
   initialPositions: PositionMap
   solutionPositions: PositionMap
+  initialHint?: HintState
   initialCrossings: number
   generationAttempts: number
 }
