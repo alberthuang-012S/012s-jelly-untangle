@@ -217,14 +217,14 @@ button:focus-visible {
 }
 
 .difficulty-heading-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-content: center;
-  gap: 22px;
   margin-bottom: 18px;
 }
 
 .difficulty-heading-copy {
+  grid-column: 2;
   min-width: 188px;
 }
 
@@ -389,10 +389,12 @@ button:focus-visible {
 }
 
 .tutorial-launch--heading {
-  flex: 0 0 122px;
+  grid-column: 1;
+  justify-self: end;
   width: 122px;
   min-height: 48px;
   margin: 0;
+  margin-right: 22px;
   padding: 7px 9px;
   gap: 6px;
   border-radius: 13px;
@@ -1161,7 +1163,7 @@ button:focus-visible {
   }
 
   .difficulty-heading-row {
-    gap: 10px;
+    column-gap: 0;
   }
 
   .difficulty-heading-copy {
@@ -1173,8 +1175,25 @@ button:focus-visible {
   }
 
   .tutorial-launch--heading {
-    flex-basis: 112px;
-    width: 112px;
+    width: 90px;
+    margin-right: 3px;
+    padding: 6px 5px;
+    gap: 4px;
+  }
+
+  .tutorial-launch--heading .tutorial-launch__icon {
+    width: 21px;
+    height: 21px;
+    border-radius: 7px;
+    font-size: 0.7rem;
+  }
+
+  .tutorial-launch--heading .tutorial-launch__copy strong {
+    font-size: 0.66rem;
+  }
+
+  .tutorial-launch--heading .tutorial-launch__arrow {
+    font-size: 0.76rem;
   }
 
   .difficulty-card {
