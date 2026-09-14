@@ -625,9 +625,10 @@ button:focus-visible {
 }
 
 .edge--safe {
-  stroke: var(--line);
-  stroke-width: 2.2px;
-  opacity: 0.75;
+  stroke: #86cddd;
+  stroke-width: 2.8px;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 2px rgba(91, 184, 213, 0.28));
 }
 
 .edge--crossing {

@@ -42,7 +42,7 @@ export function EdgeLayer({ edges, positions, crossingEdges, isWon = false }: Ed
             y2={to.y}
             strokeLinecap="round"
             vectorEffect="non-scaling-stroke"
-            filter={isCrossing ? 'url(#edge-warm-glow)' : 'url(#edge-glow)'}
+            filter={isCrossing ? 'url(#edge-warm-glow)' : undefined}
           />
         )
       })}
