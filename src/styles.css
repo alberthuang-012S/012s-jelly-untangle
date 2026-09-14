@@ -634,6 +634,7 @@ button:focus-visible {
 .edge--crossing {
   stroke: var(--coral);
   stroke-width: 4px;
+  filter: drop-shadow(0 0 2px rgba(255, 128, 108, 0.28));
   opacity: 1;
   animation: crossing-pulse 1.8s ease-in-out infinite;
 }

@@ -11,22 +11,8 @@ type EdgeLayerProps = {
 export function EdgeLayer({ edges, positions, crossingEdges, isWon = false }: EdgeLayerProps) {
   return (
     <svg className="edge-layer" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-      <defs>
-        <filter id="edge-glow" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="1.2" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-        <filter id="edge-warm-glow" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="1.5" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
+      {/* Keep strokes independent of objectBoundingBox filters: horizontal and
+          vertical lines have zero-height/width boxes and can disappear. */}
       {edges.map((edge) => {
         const from = positions[edge.from]
         const to = positions[edge.to]
@@ -42,7 +28,6 @@ export function EdgeLayer({ edges, positions, crossingEdges, isWon = false }: Ed
             y2={to.y}
             strokeLinecap="round"
             vectorEffect="non-scaling-stroke"
-            filter={isCrossing ? 'url(#edge-warm-glow)' : undefined}
           />
         )
       })}
