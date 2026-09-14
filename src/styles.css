@@ -216,8 +216,20 @@ button:focus-visible {
   color: #8db4c6;
 }
 
-.difficulty-select h2 {
-  margin: 0 0 18px;
+.difficulty-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-bottom: 18px;
+}
+
+.difficulty-heading-copy {
+  min-width: 188px;
+}
+
+.difficulty-heading-copy h2 {
+  margin: 0;
   color: var(--ink);
   font-size: 1.45rem;
   font-weight: 800;
@@ -358,15 +370,6 @@ button:focus-visible {
   color: #a8dce8;
 }
 
-.home-choice-layout {
-  display: grid;
-  grid-template-columns: 178px minmax(0, 1fr);
-  align-items: center;
-  gap: 24px;
-  width: min(1090px, 100%);
-  margin: 0 auto;
-}
-
 .tutorial-launch {
   position: relative;
   z-index: 1;
@@ -385,12 +388,14 @@ button:focus-visible {
   transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
-.tutorial-launch--compact {
-  width: 178px;
-  min-height: 62px;
+.tutorial-launch--heading {
+  flex: 0 0 122px;
+  width: 122px;
+  min-height: 48px;
   margin: 0;
-  padding: 9px 11px;
-  gap: 8px;
+  padding: 7px 9px;
+  gap: 6px;
+  border-radius: 13px;
 }
 
 .tutorial-launch:hover {
@@ -409,7 +414,7 @@ button:focus-visible {
   color: #dfa431;
 }
 
-.tutorial-launch--compact .tutorial-launch__icon {
+.tutorial-launch--heading .tutorial-launch__icon {
   width: 26px;
   height: 26px;
   border-radius: 8px;
@@ -429,7 +434,7 @@ button:focus-visible {
   font-weight: 900;
 }
 
-.tutorial-launch--compact .tutorial-launch__copy strong {
+.tutorial-launch--heading .tutorial-launch__copy strong {
   font-size: 0.72rem;
 }
 
@@ -439,18 +444,13 @@ button:focus-visible {
   font-weight: 700;
 }
 
-.tutorial-launch--compact .tutorial-launch__copy small {
-  font-size: 0.56rem;
-  white-space: nowrap;
-}
-
 .tutorial-launch__arrow {
   color: #dca32b;
   font-size: 1rem;
   font-weight: 900;
 }
 
-.tutorial-launch--compact .tutorial-launch__arrow {
+.tutorial-launch--heading .tutorial-launch__arrow {
   font-size: 0.88rem;
 }
 
@@ -1160,14 +1160,21 @@ button:focus-visible {
     gap: 10px;
   }
 
-  .home-choice-layout {
-    grid-template-columns: 1fr;
-    gap: 14px;
+  .difficulty-heading-row {
+    gap: 10px;
   }
 
-  .tutorial-launch--compact {
-    width: min(220px, 100%);
-    margin: 0 auto;
+  .difficulty-heading-copy {
+    min-width: 0;
+  }
+
+  .difficulty-heading-copy h2 {
+    font-size: 1.25rem;
+  }
+
+  .tutorial-launch--heading {
+    flex-basis: 112px;
+    width: 112px;
   }
 
   .difficulty-card {

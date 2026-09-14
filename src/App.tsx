@@ -35,20 +35,8 @@ function HomeScreen({
         <span className="hero-jelly__spark hero-jelly__spark--one">✦</span>
         <span className="hero-jelly__spark hero-jelly__spark--two">✧</span>
       </div>
-      <div className="home-choice-layout">
-        <button className="tutorial-launch tutorial-launch--compact" type="button" onClick={onTutorial}>
-          <span className="tutorial-launch__icon" aria-hidden="true">✦</span>
-          <span className="tutorial-launch__copy">
-            <strong>教學關卡</strong>
-            <small>先學會看懂交叉線</small>
-          </span>
-          <span className="tutorial-launch__arrow" aria-hidden="true">→</span>
-        </button>
-        <div>
-          <DifficultySelect onSelect={onSelect} />
-          <p className="home-footnote"><span aria-hidden="true">○</span> 所有交叉消失即可過關</p>
-        </div>
-      </div>
+      <DifficultySelect onSelect={onSelect} onTutorial={onTutorial} />
+      <p className="home-footnote"><span aria-hidden="true">○</span> 所有交叉消失即可過關</p>
     </main>
   )
 }

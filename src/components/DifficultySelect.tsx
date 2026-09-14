@@ -3,6 +3,7 @@ import type { Difficulty } from '../types/game'
 
 type DifficultySelectProps = {
   onSelect: (difficulty: Difficulty) => void
+  onTutorial: () => void
 }
 
 const difficultyIcons: Record<Difficulty, string> = {
@@ -11,11 +12,26 @@ const difficultyIcons: Record<Difficulty, string> = {
   challenge: '◈',
 }
 
-export function DifficultySelect({ onSelect }: DifficultySelectProps) {
+export function DifficultySelect({ onSelect, onTutorial }: DifficultySelectProps) {
   return (
     <section className="difficulty-select" aria-labelledby="difficulty-heading">
-      <div className="section-kicker">CHOOSE YOUR TANGLE</div>
-      <h2 id="difficulty-heading">選擇難度</h2>
+      <div className="difficulty-heading-row">
+        <button
+          className="tutorial-launch tutorial-launch--heading"
+          type="button"
+          onClick={onTutorial}
+        >
+          <span className="tutorial-launch__icon" aria-hidden="true">✦</span>
+          <span className="tutorial-launch__copy">
+            <strong>教學關卡</strong>
+          </span>
+          <span className="tutorial-launch__arrow" aria-hidden="true">→</span>
+        </button>
+        <div className="difficulty-heading-copy">
+          <div className="section-kicker">CHOOSE YOUR TANGLE</div>
+          <h2 id="difficulty-heading">選擇難度</h2>
+        </div>
+      </div>
       <div className="difficulty-grid">
         {DIFFICULTIES.map((difficulty) => {
           const config = DIFFICULTY_CONFIG[difficulty]
