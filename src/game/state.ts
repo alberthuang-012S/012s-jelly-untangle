@@ -105,3 +105,7 @@ export function addHint(game: GameState): GameState {
 export function clearHint(game: GameState): GameState {
   return game.hint ? { ...game, hint: null } : game
 }
+
+export function toggleHint(game: GameState): GameState {
+  return game.hint ? clearHint(game) : addHint(game)
+}

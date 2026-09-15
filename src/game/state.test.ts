@@ -1,12 +1,20 @@
 import { describe, expect, it } from 'vitest'
 import { createTutorialLevel } from './generator'
-import { commitGameNodeMove, createGameState, undoLastMove } from './state'
+import { commitGameNodeMove, createGameState, toggleHint, undoLastMove } from './state'
 
 describe('game state transitions', () => {
   it('starts the tutorial with one clear suggested Jelly and Ghost Position', () => {
     const game = createGameState(createTutorialLevel())
     expect(game.hint?.nodeId).toBe('demo-1')
     expect(game.hint?.position).toEqual({ x: 85, y: 20 })
+  })
+
+  it('cancels an active hint when toggled directly', () => {
+    const game = createGameState(createTutorialLevel())
+    const cleared = toggleHint(game)
+
+    expect(cleared.hint).toBeNull()
+    expect(toggleHint(cleared).hint).not.toBeNull()
   })
 
   it('records one undo entry per completed move and restores the prior position', () => {

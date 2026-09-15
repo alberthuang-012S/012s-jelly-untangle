@@ -3,6 +3,7 @@ import { Controls } from './components/Controls'
 import { DifficultySelect } from './components/DifficultySelect'
 import { GameBoard } from './components/GameBoard'
 import { Header } from './components/Header'
+import { LevelSelect } from './components/LevelSelect'
 import { SettingsPanel } from './components/SettingsPanel'
 import { TutorialOverlay } from './components/TutorialOverlay'
 import { WinModal } from './components/WinModal'
@@ -13,12 +14,14 @@ import { isTutorialComplete, markTutorialComplete } from './storage/tutorial'
 import type { Difficulty } from './types/game'
 
 function HomeScreen({
-  onSelect,
+  onSelectLevel,
   onTutorial,
 }: {
-  onSelect: (difficulty: Difficulty) => void
+  onSelectLevel: (difficulty: Difficulty, levelNumber: number) => void
   onTutorial: () => void
 }) {
+  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | null>(null)
+
   return (
     <main className="home-screen">
       <div className="home-orbit home-orbit--one" aria-hidden="true" />
@@ -35,8 +38,18 @@ function HomeScreen({
         <span className="hero-jelly__spark hero-jelly__spark--one">✦</span>
         <span className="hero-jelly__spark hero-jelly__spark--two">✧</span>
       </div>
-      <DifficultySelect onSelect={onSelect} onTutorial={onTutorial} />
-      <p className="home-footnote"><span aria-hidden="true">○</span> 所有交叉消失即可過關</p>
+      {selectedDifficulty ? (
+        <LevelSelect
+          difficulty={selectedDifficulty}
+          onSelectLevel={onSelectLevel}
+          onBack={() => setSelectedDifficulty(null)}
+        />
+      ) : (
+        <>
+          <DifficultySelect onSelect={setSelectedDifficulty} onTutorial={onTutorial} />
+          <p className="home-footnote"><span aria-hidden="true">○</span> 所有交叉消失即可過關</p>
+        </>
+      )}
     </main>
   )
 }
@@ -57,7 +70,7 @@ export default function App() {
     finishNodeMove,
     undo,
     reset,
-    hint,
+    toggleHint,
     clearGameHint,
   } = useGameState()
 
@@ -74,9 +87,9 @@ export default function App() {
     return () => window.clearTimeout(timer)
   }, [game?.status, tutorialMode])
 
-  const startDifficulty = (nextDifficulty: Difficulty) => {
+  const startLevel = (nextDifficulty: Difficulty, nextLevelNumber: number) => {
     setDifficulty(nextDifficulty)
-    setLevelNumber(1)
+    setLevelNumber(nextLevelNumber)
     setScreen('game')
     setSettingsOpen(false)
     setWinVisible(false)
@@ -86,8 +99,12 @@ export default function App() {
       loadLevel(createTutorialLevel())
     } else {
       setTutorialMode(false)
-      startNewGame(nextDifficulty, 1)
+      startNewGame(nextDifficulty, nextLevelNumber)
     }
+  }
+
+  const startDifficulty = (nextDifficulty: Difficulty) => {
+    startLevel(nextDifficulty, 1)
   }
 
   const startTutorial = () => {
@@ -138,7 +155,7 @@ export default function App() {
   }
 
   if (screen === 'home') {
-    return <HomeScreen onSelect={startDifficulty} onTutorial={startTutorial} />
+    return <HomeScreen onSelectLevel={startLevel} onTutorial={startTutorial} />
   }
 
   if (!game) return null
@@ -186,8 +203,9 @@ export default function App() {
         <Controls
           canUndo={game.moveHistory.length > 0}
           disabled={game.status === 'won' || isTutorialWin}
+          hintActive={Boolean(game.hint)}
           onUndo={undo}
-          onHint={hint}
+          onHint={toggleHint}
           onReset={reset}
         />
       </main>

@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react'
 import { generateLevelForNumber } from '../game/generator'
 import {
-  addHint,
   clearHint,
   commitGameNodeMove,
   createGameState,
   resetGame,
+  toggleHint as toggleGameHint,
   undoLastMove,
   updateGameNode,
 } from '../game/state'
@@ -38,8 +38,8 @@ export function useGameState() {
     setGame((current) => (current ? resetGame(current) : current))
   }, [])
 
-  const hint = useCallback(() => {
-    setGame((current) => (current ? addHint(current) : current))
+  const toggleHint = useCallback(() => {
+    setGame((current) => (current ? toggleGameHint(current) : current))
   }, [])
 
   const clearGameHint = useCallback(() => {
@@ -54,7 +54,7 @@ export function useGameState() {
     finishNodeMove,
     undo,
     reset,
-    hint,
+    toggleHint,
     clearGameHint,
   }
 }
