@@ -17,11 +17,6 @@ export function TutorialOverlay({ complete, onContinue }: TutorialOverlayProps) 
   }
 
   return (
-    <div className="tutorial-message tutorial-message--guide" role="status">
-      <p className="tutorial-message__eyebrow">QUICK START</p>
-      <h2>拖動水母</h2>
-      <p>把水母移到淡淡的圈圈附近，讓紅色交叉線消失。</p>
-      <span className="tutorial-message__hint"><span aria-hidden="true">✦</span> 交叉線會即時更新</span>
-    </div>
+    <p className="tutorial-instruction" role="status">拖動發光水母，讓紅線不再交叉。</p>
   )
 }

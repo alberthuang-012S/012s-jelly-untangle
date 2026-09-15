@@ -30,13 +30,13 @@ export function GameBoard({ game, onMove, onFinishMove, onStartMove }: GameBoard
     >
       <div className="board-light board-light--one" aria-hidden="true" />
       <div className="board-light board-light--two" aria-hidden="true" />
-      {game.tutorialHint && (
+      {game.tutorialHint && game.status === 'playing' && (
         <div
           className="tutorial-hint-ghost"
           style={{ left: `${game.tutorialHint.position.x}%`, top: `${game.tutorialHint.position.y}%` }}
           aria-hidden="true"
         >
-          <span>試試這裡</span>
+          <span>移到這裡</span>
         </div>
       )}
       <EdgeLayer
@@ -52,7 +52,7 @@ export function GameBoard({ game, onMove, onFinishMove, onStartMove }: GameBoard
             node={node}
             position={game.positions[node.id]}
             isDragging={draggingId === node.id}
-            isTutorialHintTarget={game.tutorialHint?.nodeId === node.id}
+            isTutorialHintTarget={game.status === 'playing' && game.tutorialHint?.nodeId === node.id}
             onPointerDown={handlePointerDown}
           />
         ))}

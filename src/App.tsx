@@ -78,7 +78,6 @@ export default function App() {
     finishNodeMove,
     undo,
     reset,
-    clearTutorialHint,
   } = useGameState()
 
   useEffect(() => {
@@ -194,20 +193,17 @@ export default function App() {
             <span className="crossing-counter__label">{game.crossingCount === 0 ? '全部解開' : '個交叉'}</span>
           </div>
         </section>
+        {tutorialMode && !tutorialComplete && <TutorialOverlay complete={false} onContinue={finishTutorial} />}
         <div className="game-area">
           <GameBoard
             game={game}
             onMove={updateNodePosition}
             onFinishMove={finishNodeMove}
-            onStartMove={(nodeId) => {
-              clearTutorialHint()
-              void nodeId
-            }}
+            onStartMove={() => {}}
           />
-          {tutorialMode && !tutorialComplete && <TutorialOverlay complete={false} onContinue={finishTutorial} />}
           {isTutorialWin && <TutorialOverlay complete onContinue={finishTutorial} />}
         </div>
-        <p className="game-tip"><span aria-hidden="true">✦</span> 讓所有線段不再交叉，就能解開這一題</p>
+        {!tutorialMode && <p className="game-tip"><span aria-hidden="true">✦</span> 讓所有線段不再交叉，就能解開這一題</p>}
         <Controls
           canUndo={game.moveHistory.length > 0}
           disabled={game.status === 'won' || isTutorialWin}

@@ -62,7 +62,6 @@ export function commitGameNodeMove(
     crossingCount: analysis.count,
     crossingEdges: analysis.crossingEdges,
     moveHistory,
-    tutorialHint: null,
     status: analysis.count === 0 ? 'won' : 'playing',
   }
 }
@@ -78,7 +77,6 @@ export function undoLastMove(game: GameState): GameState {
     crossingCount: analysis.count,
     crossingEdges: analysis.crossingEdges,
     moveHistory: game.moveHistory.slice(0, -1),
-    tutorialHint: null,
     status: 'playing',
   }
 }
@@ -92,7 +90,6 @@ export function resetGame(game: GameState): GameState {
     crossingCount: analysis.count,
     crossingEdges: analysis.crossingEdges,
     moveHistory: [],
-    tutorialHint: null,
     status: 'playing',
   }
 }

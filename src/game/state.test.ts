@@ -1,8 +1,20 @@
 import { describe, expect, it } from 'vitest'
 import { createTutorialLevel } from './generator'
-import { commitGameNodeMove, createGameState, undoLastMove } from './state'
+import { commitGameNodeMove, createGameState, resetGame, updateGameNode, undoLastMove } from './state'
 
 describe('game state transitions', () => {
+  it('keeps tutorial guidance during dragging, unsuccessful drops and reset', () => {
+    const game = createGameState(createTutorialLevel())
+    expect(game.nodes).toHaveLength(4)
+    expect(game.crossingCount).toBe(1)
+    const to = { x: 84, y: 74 }
+    const dragging = updateGameNode(game, 'demo-1', to)
+    expect(dragging.tutorialHint).toEqual(game.tutorialHint)
+    const dropped = commitGameNodeMove(dragging, 'demo-1', game.positions['demo-1'], to)
+    expect(dropped.status).toBe('playing')
+    expect(dropped.tutorialHint).toEqual(game.tutorialHint)
+    expect(resetGame(dropped).tutorialHint).toEqual(game.tutorialHint)
+  })
   it('starts the tutorial with one clear suggested Jelly and Ghost Position', () => {
     const game = createGameState(createTutorialLevel())
     expect(game.tutorialHint?.nodeId).toBe('demo-1')

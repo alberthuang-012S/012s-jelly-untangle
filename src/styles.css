@@ -1020,6 +1020,19 @@ button:focus-visible {
   line-height: 1;
 }
 
+.tutorial-instruction {
+  margin: 0 0 12px;
+  padding: 0 4px;
+  color: var(--soft-ink);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.game-area + .controls {
+  margin-top: 16px;
+}
+
 .tutorial-message {
   position: absolute;
   z-index: 10;
