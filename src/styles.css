@@ -899,7 +899,6 @@ button:focus-visible {
   box-shadow: 0 15px 30px rgba(44, 132, 159, 0.13);
   text-align: center;
   transform: translateX(-50%);
-  animation: panel-in 280ms ease-out;
 }
 
 .tutorial-message--guide {
@@ -907,12 +906,14 @@ button:focus-visible {
   left: 18px;
   text-align: left;
   transform: none;
+  animation: tutorial-guide-in 280ms ease-out;
 }
 
 .tutorial-message--complete {
   top: 50%;
   pointer-events: auto;
   transform: translate(-50%, -50%);
+  animation: tutorial-complete-in 280ms ease-out;
 }
 
 .tutorial-message h2 {
@@ -1106,6 +1107,16 @@ button:focus-visible {
 @keyframes panel-in {
   from { opacity: 0; transform: translateY(-5px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tutorial-guide-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tutorial-complete-in {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.96); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
 @keyframes fade-in {

@@ -1,4 +1,4 @@
-import { DIFFICULTY_CONFIG, DIFFICULTIES } from '../game/difficulty'
+import { DIFFICULTY_CONFIG, DIFFICULTIES, LEVELS_PER_DIFFICULTY } from '../game/difficulty'
 import type { Difficulty } from '../types/game'
 
 type DifficultySelectProps = {
@@ -48,7 +48,7 @@ export function DifficultySelect({ onSelect, onTutorial }: DifficultySelectProps
                 <span className="difficulty-card__description">{config.description}</span>
               </span>
               <span className="difficulty-card__meta">
-                <span>{config.nodeCount} Jelly · {config.edgeCount} 線</span>
+                <span>{LEVELS_PER_DIFFICULTY} 關 · {config.nodeCount} Jelly · {config.edgeCount} 線</span>
                 <span>{config.estimatedTime}</span>
               </span>
             </button>

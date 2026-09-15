@@ -1,4 +1,4 @@
-import { DIFFICULTY_CONFIG } from './difficulty'
+import { DIFFICULTY_CONFIG, LEVELS_PER_DIFFICULTY } from './difficulty'
 import { analyzeCrossings } from './intersections'
 import { assertValidLevel } from './validation'
 import type { Difficulty, Edge, JellyNode, Level, PositionMap } from '../types/game'
@@ -21,6 +21,20 @@ const assetNames = [
   'jelly-cute.webp',
   'jelly-playful.webp',
 ]
+
+const difficultySeeds: Record<Difficulty, number> = {
+  basic: 0x13579bdf,
+  normal: 0x2468ace0,
+  challenge: 0x9e3779b9,
+}
+
+function seededRandom(seed: number): () => number {
+  let value = seed >>> 0
+  return () => {
+    value = (Math.imul(value, 1664525) + 1013904223) >>> 0
+    return value / 0x100000000
+  }
+}
 
 function createNodes(count: number): JellyNode[] {
   return Array.from({ length: count }, (_, index) => ({
@@ -159,6 +173,7 @@ export function createTutorialLevel(): Level {
   }
   return {
     difficulty: 'basic',
+    levelNumber: 0,
     nodes,
     edges,
     initialPositions,
@@ -172,7 +187,11 @@ export function createTutorialLevel(): Level {
   }
 }
 
-export function generateLevel(difficulty: Difficulty, random: () => number = Math.random): Level {
+export function generateLevel(
+  difficulty: Difficulty,
+  random: () => number = Math.random,
+  levelNumber = 1,
+): Level {
   const config = DIFFICULTY_CONFIG[difficulty]
   let bestCandidate: Level | null = null
   let bestDistance = Number.POSITIVE_INFINITY
@@ -183,6 +202,7 @@ export function generateLevel(difficulty: Difficulty, random: () => number = Mat
     const initialCrossings = analyzeCrossings(template.edges, initialPositions).count
     const level: Level = {
       difficulty,
+      levelNumber,
       nodes: template.nodes,
       edges: template.edges,
       initialPositions,
@@ -210,4 +230,13 @@ export function generateLevel(difficulty: Difficulty, random: () => number = Mat
     )
   }
   throw new Error(`Could not generate a ${difficulty} level.`)
+}
+
+export function generateLevelForNumber(difficulty: Difficulty, levelNumber: number): Level {
+  if (!Number.isInteger(levelNumber) || levelNumber < 1 || levelNumber > LEVELS_PER_DIFFICULTY) {
+    throw new RangeError(`Level number must be between 1 and ${LEVELS_PER_DIFFICULTY}, received ${levelNumber}.`)
+  }
+
+  const seed = (difficultySeeds[difficulty] + Math.imul(levelNumber, 0x45d9f3b)) >>> 0
+  return generateLevel(difficulty, seededRandom(seed), levelNumber)
 }

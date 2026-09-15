@@ -30,6 +30,7 @@ export type Move = {
 
 export type Level = {
   difficulty: Difficulty
+  levelNumber: number
   nodes: JellyNode[]
   edges: Edge[]
   initialPositions: PositionMap
@@ -46,6 +47,7 @@ export type HintState = {
 
 export type GameState = {
   difficulty: Difficulty
+  levelNumber: number
   nodes: JellyNode[]
   edges: Edge[]
   initialPositions: PositionMap

@@ -11,13 +11,14 @@ Jelly Untangle（水母解結）是 012S Jelly 系列的空間邏輯遊戲：拖
 
 ## Difficulty
 
+- 每種難度各有 10 關，通關後按「下一關」進入同難度的下一個固定關卡。
 - Basic：6 Jelly、6 edges、初始 2–4 個交叉，約 30 秒–2 分鐘。
 - Normal：8 Jelly、10 edges、初始 5–8 個交叉，約 2–4 分鐘。
 - Challenge：10 Jelly、14 edges、初始 9–15 個交叉，約 4–8 分鐘。
 
 ## Generator 設計
 
-每個難度先建立一組已知不交叉的平面配置與固定 Edge Graph，再將同一批 Solution Positions 做隨機排列，得到初始位置。Generator 不會隨機連線碰運氣；產生後由 validator 檢查 solution crossings、初始 crossing 範圍、自環、重複邊、節點 ID、邊界與圖形連通性，不符合就重新洗牌。
+每個難度先建立一組已知不交叉的平面配置與固定 Edge Graph，再將同一批 Solution Positions 依關卡種子做可重現的排列，得到 10 個固定初始配置。Generator 不會隨機連線碰運氣；產生後由 validator 檢查 solution crossings、初始 crossing 範圍、自環、重複邊、節點 ID、邊界與圖形連通性，不符合就重新洗牌。
 
 ## Development
 

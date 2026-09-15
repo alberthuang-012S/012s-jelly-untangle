@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { generateLevel } from '../game/generator'
+import { generateLevelForNumber } from '../game/generator'
 import {
   addHint,
   clearHint,
@@ -18,8 +18,8 @@ export function useGameState() {
     setGame(createGameState(level))
   }, [])
 
-  const startNewGame = useCallback((difficulty: Difficulty) => {
-    setGame(createGameState(generateLevel(difficulty)))
+  const startNewGame = useCallback((difficulty: Difficulty, levelNumber = 1) => {
+    setGame(createGameState(generateLevelForNumber(difficulty, levelNumber)))
   }, [])
 
   const updateNodePosition = useCallback((nodeId: string, position: Position) => {

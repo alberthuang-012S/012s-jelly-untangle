@@ -1,5 +1,7 @@
 import type { Difficulty, DifficultyConfig } from '../types/game'
 
+export const LEVELS_PER_DIFFICULTY = 10
+
 export const DIFFICULTY_CONFIG: Record<Difficulty, DifficultyConfig> = {
   basic: {
     label: '基礎',

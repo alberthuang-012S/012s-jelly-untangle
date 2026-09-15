@@ -6,7 +6,7 @@ import { Header } from './components/Header'
 import { SettingsPanel } from './components/SettingsPanel'
 import { TutorialOverlay } from './components/TutorialOverlay'
 import { WinModal } from './components/WinModal'
-import { DIFFICULTY_CONFIG } from './game/difficulty'
+import { DIFFICULTY_CONFIG, LEVELS_PER_DIFFICULTY } from './game/difficulty'
 import { createTutorialLevel } from './game/generator'
 import { useGameState } from './hooks/useGameState'
 import { isTutorialComplete, markTutorialComplete } from './storage/tutorial'
@@ -44,6 +44,7 @@ function HomeScreen({
 export default function App() {
   const [screen, setScreen] = useState<'home' | 'game'>('home')
   const [difficulty, setDifficulty] = useState<Difficulty>('basic')
+  const [levelNumber, setLevelNumber] = useState(1)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [tutorialMode, setTutorialMode] = useState(false)
   const [tutorialComplete, setTutorialComplete] = useState(false)
@@ -75,6 +76,7 @@ export default function App() {
 
   const startDifficulty = (nextDifficulty: Difficulty) => {
     setDifficulty(nextDifficulty)
+    setLevelNumber(1)
     setScreen('game')
     setSettingsOpen(false)
     setWinVisible(false)
@@ -84,12 +86,13 @@ export default function App() {
       loadLevel(createTutorialLevel())
     } else {
       setTutorialMode(false)
-      startNewGame(nextDifficulty)
+      startNewGame(nextDifficulty, 1)
     }
   }
 
   const startTutorial = () => {
     setDifficulty('basic')
+    setLevelNumber(0)
     setScreen('game')
     setSettingsOpen(false)
     setTutorialMode(true)
@@ -100,6 +103,7 @@ export default function App() {
 
   const backToHome = () => {
     setScreen('home')
+    setLevelNumber(1)
     setSettingsOpen(false)
     setTutorialMode(false)
     setTutorialComplete(false)
@@ -117,12 +121,20 @@ export default function App() {
   const restartCurrentGame = () => {
     setWinVisible(false)
     setTutorialComplete(false)
-    startNewGame(difficulty)
+    startNewGame(difficulty, levelNumber)
   }
 
   const nextLevel = () => {
     setWinVisible(false)
-    startNewGame(difficulty)
+    if (levelNumber >= LEVELS_PER_DIFFICULTY) {
+      setScreen('home')
+      setLevelNumber(1)
+      return
+    }
+
+    const nextLevelNumber = levelNumber + 1
+    setLevelNumber(nextLevelNumber)
+    startNewGame(difficulty, nextLevelNumber)
   }
 
   if (screen === 'home') {
@@ -147,7 +159,9 @@ export default function App() {
       <main className="game-screen">
         <section className="game-intro" aria-live="polite">
           <div>
-            <p className="game-intro__eyebrow">{config.shortLabel} · {config.label}</p>
+          <p className="game-intro__eyebrow">
+            {tutorialMode ? 'TUTORIAL · 教學關卡' : `${config.shortLabel} · ${config.label} · 第 ${game.levelNumber} / ${LEVELS_PER_DIFFICULTY} 關`}
+          </p>
             <h1>{tutorialMode ? '先試試看' : '整理這團能量線'}</h1>
           </div>
           <div className={`crossing-counter${game.crossingCount === 0 ? ' crossing-counter--clear' : ''}`}>
@@ -180,6 +194,8 @@ export default function App() {
       {winVisible && !tutorialMode && (
         <WinModal
           difficulty={difficulty}
+          levelNumber={game.levelNumber}
+          totalLevels={LEVELS_PER_DIFFICULTY}
           moves={game.moveHistory.length}
           onNext={nextLevel}
           onReplay={restartCurrentGame}

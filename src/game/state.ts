@@ -20,6 +20,7 @@ export function createGameState(level: Level): GameState {
   const analysis = analyzeCrossings(level.edges, positions)
   return {
     difficulty: level.difficulty,
+    levelNumber: level.levelNumber,
     nodes: level.nodes,
     edges: level.edges,
     initialPositions: clonePositions(level.initialPositions),
