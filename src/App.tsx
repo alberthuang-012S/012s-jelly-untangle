@@ -11,6 +11,7 @@ import { WinModal } from './components/WinModal'
 import { DIFFICULTY_CONFIG, LEVELS_PER_DIFFICULTY } from './game/difficulty'
 import { assetNames, createTutorialLevel } from './game/generator'
 import { useGameState } from './hooks/useGameState'
+import { useSound } from './hooks/useSound'
 import { getUnlockedLevel, recordLevelCompletion } from './storage/progress'
 import { isTutorialComplete, markTutorialComplete } from './storage/tutorial'
 import type { Difficulty } from './types/game'
@@ -80,6 +81,7 @@ export default function App() {
     undo,
     reset,
   } = useGameState()
+  const sound = useSound(game)
 
   useEffect(() => {
     if (!game || game.status !== 'won') {
@@ -178,6 +180,8 @@ export default function App() {
       <Header onBack={backToHome} settingsOpen={settingsOpen} onToggleSettings={() => setSettingsOpen((open) => !open)} />
       {settingsOpen && (
         <SettingsPanel
+          soundEnabled={sound.enabled}
+          onToggleSound={sound.toggle}
           currentDifficulty={difficulty}
           onSelectDifficulty={startDifficulty}
           onHome={backToHome}
@@ -202,7 +206,7 @@ export default function App() {
             game={game}
             onMove={updateNodePosition}
             onFinishMove={finishNodeMove}
-            onStartMove={() => {}}
+            onStartMove={sound.grab}
           />
           {isTutorialWin && <TutorialOverlay complete onContinue={finishTutorial} />}
         </div>
