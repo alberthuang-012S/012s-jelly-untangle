@@ -5,18 +5,17 @@ type JellyNodeProps = {
   node: JellyNodeType
   position: Position
   isDragging: boolean
-  isTutorialHintTarget: boolean
   onPointerDown: (event: React.PointerEvent<HTMLButtonElement>, nodeId: string) => void
 }
 
 const assetBase = `${import.meta.env.BASE_URL}assets/`
 
-export function JellyNode({ node, position, isDragging, isTutorialHintTarget, onPointerDown }: JellyNodeProps) {
+export function JellyNode({ node, position, isDragging, onPointerDown }: JellyNodeProps) {
   const [loadedAsset, setLoadedAsset] = useState<string | null>(null)
   const ready = loadedAsset === node.asset
   return (
     <button
-      className={`jelly-node${isDragging ? ' jelly-node--dragging' : ''}${isTutorialHintTarget ? ' jelly-node--tutorial-hint' : ''}`}
+      className={`jelly-node${isDragging ? ' jelly-node--dragging' : ''}`}
       style={{ left: `${position.x}%`, top: `${position.y}%` }}
       type="button"
       aria-label={`拖動 ${node.label}`}

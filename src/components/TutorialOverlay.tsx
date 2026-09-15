@@ -17,6 +17,6 @@ export function TutorialOverlay({ complete, onContinue }: TutorialOverlayProps) 
   }
 
   return (
-    <p className="tutorial-instruction" role="status">拖動發光水母，讓紅線不再交叉。</p>
+    <p className="tutorial-instruction" role="status">嘗試移動水母，讓紅線不再交叉。</p>
   )
 }
