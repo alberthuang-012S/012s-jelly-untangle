@@ -69,6 +69,7 @@ export default function App() {
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [tutorialMode, setTutorialMode] = useState(false)
   const [tutorialComplete, setTutorialComplete] = useState(false)
+  const [tutorialIntroOpen, setTutorialIntroOpen] = useState(false)
   const [winVisible, setWinVisible] = useState(false)
   const {
     game,
@@ -102,6 +103,7 @@ export default function App() {
     setWinVisible(false)
     setTutorialComplete(false)
     if (nextDifficulty === 'basic' && !isTutorialComplete()) {
+      setTutorialIntroOpen(true)
       setTutorialMode(true)
       loadLevel(createTutorialLevel())
     } else {
@@ -115,6 +117,7 @@ export default function App() {
   }
 
   const startTutorial = () => {
+    setTutorialIntroOpen(true)
     setDifficulty('basic')
     setLevelNumber(0)
     setScreen('game')
@@ -193,7 +196,7 @@ export default function App() {
             <span className="crossing-counter__label">{game.crossingCount === 0 ? '全部解開' : '個交叉'}</span>
           </div>
         </section>
-        {tutorialMode && !tutorialComplete && <TutorialOverlay complete={false} onContinue={finishTutorial} />}
+        {tutorialMode && tutorialIntroOpen && <TutorialOverlay complete={false} onContinue={() => setTutorialIntroOpen(false)} />}
         <div className="game-area">
           <GameBoard
             game={game}

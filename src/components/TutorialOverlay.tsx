@@ -1,9 +1,18 @@
+import { useEffect, useRef } from 'react'
+
 type TutorialOverlayProps = {
   complete: boolean
   onContinue: () => void
 }
 
 export function TutorialOverlay({ complete, onContinue }: TutorialOverlayProps) {
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  useEffect(() => {
+    if (complete) return
+    const dialog = dialogRef.current
+    dialog?.showModal()
+    return () => dialog?.close()
+  }, [complete])
   if (complete) {
     return (
       <div className="tutorial-message tutorial-message--complete" role="status">
@@ -17,6 +26,9 @@ export function TutorialOverlay({ complete, onContinue }: TutorialOverlayProps) 
   }
 
   return (
-    <p className="tutorial-instruction" role="status">嘗試移動水母，讓紅線不再交叉。</p>
+    <dialog ref={dialogRef} className="tutorial-intro-dialog" aria-labelledby="tutorial-intro-text" onCancel={onContinue}>
+      <p id="tutorial-intro-text">嘗試移動水母，讓紅線不再交叉。</p>
+      <button className="primary-button" type="button" onClick={onContinue} autoFocus>開始嘗試</button>
+    </dialog>
   )
 }
