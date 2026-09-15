@@ -10,6 +10,7 @@ import { WinModal } from './components/WinModal'
 import { DIFFICULTY_CONFIG, LEVELS_PER_DIFFICULTY } from './game/difficulty'
 import { createTutorialLevel } from './game/generator'
 import { useGameState } from './hooks/useGameState'
+import { getUnlockedLevel, recordLevelCompletion } from './storage/progress'
 import { isTutorialComplete, markTutorialComplete } from './storage/tutorial'
 import type { Difficulty } from './types/game'
 
@@ -41,6 +42,7 @@ function HomeScreen({
       {selectedDifficulty ? (
         <LevelSelect
           difficulty={selectedDifficulty}
+          unlockedLevel={getUnlockedLevel(selectedDifficulty)}
           onSelectLevel={onSelectLevel}
           onBack={() => setSelectedDifficulty(null)}
         />
@@ -83,6 +85,7 @@ export default function App() {
       const timer = window.setTimeout(() => setTutorialComplete(true), 650)
       return () => window.clearTimeout(timer)
     }
+    recordLevelCompletion(game.difficulty, game.levelNumber)
     const timer = window.setTimeout(() => setWinVisible(true), 850)
     return () => window.clearTimeout(timer)
   }, [game?.status, tutorialMode])

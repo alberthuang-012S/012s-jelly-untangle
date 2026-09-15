@@ -305,6 +305,18 @@ button:focus-visible {
   transform: translateY(-1px);
 }
 
+.level-button--locked,
+.level-button--locked:hover,
+.level-button--locked:active {
+  border-color: rgba(177, 202, 211, 0.34);
+  background: rgba(245, 250, 252, 0.78);
+  box-shadow: none;
+  color: #aebfc7;
+  cursor: not-allowed;
+  opacity: 0.72;
+  transform: none;
+}
+
 .level-button__number {
   color: var(--sky-deep);
   font-size: 1.45rem;
@@ -316,6 +328,11 @@ button:focus-visible {
   color: #91aab8;
   font-size: 0.66rem;
   font-weight: 800;
+}
+
+.level-button--locked .level-button__number,
+.level-button--locked .level-button__label {
+  color: #aebfc7;
 }
 
 .level-select__note {
