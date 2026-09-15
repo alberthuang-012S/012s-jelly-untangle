@@ -885,6 +885,13 @@ button:focus-visible {
   transform: translate(-50%, -53%) scale(1.055);
 }
 
+.jelly-node__fallback {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  pointer-events: none;
+}
+
 .jelly-node__image {
   position: relative;
   z-index: 2;

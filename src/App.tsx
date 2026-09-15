@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { preload } from 'react-dom'
 import { Controls } from './components/Controls'
 import { DifficultySelect } from './components/DifficultySelect'
 import { GameBoard } from './components/GameBoard'
@@ -8,7 +9,7 @@ import { SettingsPanel } from './components/SettingsPanel'
 import { TutorialOverlay } from './components/TutorialOverlay'
 import { WinModal } from './components/WinModal'
 import { DIFFICULTY_CONFIG, LEVELS_PER_DIFFICULTY } from './game/difficulty'
-import { createTutorialLevel } from './game/generator'
+import { assetNames, createTutorialLevel } from './game/generator'
 import { useGameState } from './hooks/useGameState'
 import { getUnlockedLevel, recordLevelCompletion } from './storage/progress'
 import { isTutorialComplete, markTutorialComplete } from './storage/tutorial'
@@ -57,6 +58,11 @@ function HomeScreen({
 }
 
 export default function App() {
+  useEffect(() => {
+    for (const asset of assetNames) {
+      preload(`${import.meta.env.BASE_URL}assets/${asset}`, { as: 'image', fetchPriority: 'low' })
+    }
+  }, [])
   const [screen, setScreen] = useState<'home' | 'game'>('home')
   const [difficulty, setDifficulty] = useState<Difficulty>('basic')
   const [levelNumber, setLevelNumber] = useState(1)

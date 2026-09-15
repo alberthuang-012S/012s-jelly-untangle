@@ -9,7 +9,7 @@ type Template = {
   solutionPositions: PositionMap
 }
 
-const assetNames = [
+export const assetNames = [
   'jelly-normal-cyan.webp',
   'jelly-normal-pink.webp',
   'jelly-normal-purple.webp',
