@@ -30,10 +30,10 @@ export function GameBoard({ game, onMove, onFinishMove, onStartMove }: GameBoard
     >
       <div className="board-light board-light--one" aria-hidden="true" />
       <div className="board-light board-light--two" aria-hidden="true" />
-      {game.hint && (
+      {game.tutorialHint && (
         <div
-          className="hint-ghost"
-          style={{ left: `${game.hint.position.x}%`, top: `${game.hint.position.y}%` }}
+          className="tutorial-hint-ghost"
+          style={{ left: `${game.tutorialHint.position.x}%`, top: `${game.tutorialHint.position.y}%` }}
           aria-hidden="true"
         >
           <span>試試這裡</span>
@@ -52,7 +52,7 @@ export function GameBoard({ game, onMove, onFinishMove, onStartMove }: GameBoard
             node={node}
             position={game.positions[node.id]}
             isDragging={draggingId === node.id}
-            isHintTarget={game.hint?.nodeId === node.id}
+            isTutorialHintTarget={game.tutorialHint?.nodeId === node.id}
             onPointerDown={handlePointerDown}
           />
         ))}

@@ -1,4 +1,3 @@
-import { findHint } from './hint'
 import { analyzeCrossings } from './intersections'
 import type { GameState, Level, Position, PositionMap } from '../types/game'
 import { resolveDropPosition } from '../utils/position'
@@ -30,9 +29,9 @@ export function createGameState(level: Level): GameState {
     crossingEdges: analysis.crossingEdges,
     moveHistory: [],
     status: analysis.count === 0 ? 'won' : 'playing',
-    hint: level.initialHint ? {
-      nodeId: level.initialHint.nodeId,
-      position: { ...level.initialHint.position },
+    tutorialHint: level.tutorialHint ? {
+      nodeId: level.tutorialHint.nodeId,
+      position: { ...level.tutorialHint.position },
     } : null,
   }
 }
@@ -63,7 +62,7 @@ export function commitGameNodeMove(
     crossingCount: analysis.count,
     crossingEdges: analysis.crossingEdges,
     moveHistory,
-    hint: null,
+    tutorialHint: null,
     status: analysis.count === 0 ? 'won' : 'playing',
   }
 }
@@ -79,7 +78,7 @@ export function undoLastMove(game: GameState): GameState {
     crossingCount: analysis.count,
     crossingEdges: analysis.crossingEdges,
     moveHistory: game.moveHistory.slice(0, -1),
-    hint: null,
+    tutorialHint: null,
     status: 'playing',
   }
 }
@@ -93,19 +92,11 @@ export function resetGame(game: GameState): GameState {
     crossingCount: analysis.count,
     crossingEdges: analysis.crossingEdges,
     moveHistory: [],
-    hint: null,
+    tutorialHint: null,
     status: 'playing',
   }
 }
 
-export function addHint(game: GameState): GameState {
-  return { ...game, hint: findHint(game.nodes, game.positions, game.solutionPositions) }
-}
-
-export function clearHint(game: GameState): GameState {
-  return game.hint ? { ...game, hint: null } : game
-}
-
-export function toggleHint(game: GameState): GameState {
-  return game.hint ? clearHint(game) : addHint(game)
+export function clearTutorialHint(game: GameState): GameState {
+  return game.tutorialHint ? { ...game, tutorialHint: null } : game
 }

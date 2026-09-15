@@ -35,12 +35,12 @@ export type Level = {
   edges: Edge[]
   initialPositions: PositionMap
   solutionPositions: PositionMap
-  initialHint?: HintState
+  tutorialHint?: TutorialHint
   initialCrossings: number
   generationAttempts: number
 }
 
-export type HintState = {
+export type TutorialHint = {
   nodeId: string
   position: Position
 }
@@ -57,7 +57,7 @@ export type GameState = {
   crossingEdges: Set<EdgeId>
   moveHistory: Move[]
   status: GameStatus
-  hint: HintState | null
+  tutorialHint: TutorialHint | null
 }
 
 export type DifficultyConfig = {

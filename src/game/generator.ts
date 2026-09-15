@@ -178,7 +178,7 @@ export function createTutorialLevel(): Level {
     edges,
     initialPositions,
     solutionPositions,
-    initialHint: {
+    tutorialHint: {
       nodeId: 'demo-1',
       position: { ...solutionPositions['demo-1'] },
     },

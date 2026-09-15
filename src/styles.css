@@ -908,16 +908,16 @@ button:focus-visible {
 }
 
 .jelly-node--dragging .jelly-node__halo,
-.jelly-node--hint .jelly-node__halo {
+.jelly-node--tutorial-hint .jelly-node__halo {
   opacity: 1;
   animation: jelly-halo 1.3s ease-in-out infinite;
 }
 
-.jelly-node--hint .jelly-node__image {
-  animation: hint-bob 1.45s ease-in-out infinite;
+.jelly-node--tutorial-hint .jelly-node__image {
+  animation: tutorial-hint-bob 1.45s ease-in-out infinite;
 }
 
-.hint-ghost {
+.tutorial-hint-ghost {
   position: absolute;
   z-index: 2;
   width: clamp(65px, 10vw, 102px);
@@ -927,10 +927,10 @@ button:focus-visible {
   background: rgba(232, 248, 252, 0.33);
   pointer-events: none;
   transform: translate(-50%, -50%);
-  animation: ghost-breathe 1.8s ease-in-out infinite;
+  animation: tutorial-ghost-breathe 1.8s ease-in-out infinite;
 }
 
-.hint-ghost::after {
+.tutorial-hint-ghost::after {
   position: absolute;
   inset: 7px;
   border: 1px solid rgba(91, 184, 213, 0.24);
@@ -938,7 +938,7 @@ button:focus-visible {
   content: '';
 }
 
-.hint-ghost span {
+.tutorial-hint-ghost span {
   position: absolute;
   top: calc(100% + 5px);
   left: 50%;
@@ -970,7 +970,7 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 9px;
-  width: min(540px, 100%);
+  width: min(360px, 100%);
   margin: 0 auto;
   padding: 9px;
   border: 1px solid rgba(151, 211, 224, 0.38);
@@ -1001,11 +1001,6 @@ button:focus-visible {
   background: var(--sky-pale);
   color: var(--sky-deep);
   transform: translateY(-1px);
-}
-
-.control-button--hint:hover:not(:disabled) {
-  background: #fff7e5;
-  color: #c88b1e;
 }
 
 .control-button:disabled {
@@ -1226,12 +1221,12 @@ button:focus-visible {
   50% { box-shadow: 0 0 0 13px rgba(91, 184, 213, 0.1); }
 }
 
-@keyframes hint-bob {
+@keyframes tutorial-hint-bob {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
 }
 
-@keyframes ghost-breathe {
+@keyframes tutorial-ghost-breathe {
   0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(0.97); }
   50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
 }
@@ -1410,7 +1405,7 @@ button:focus-visible {
     height: 67px;
   }
 
-  .hint-ghost {
+  .tutorial-hint-ghost {
     width: 67px;
     height: 67px;
   }
@@ -1450,7 +1445,7 @@ button:focus-visible {
   }
 
   .jelly-node,
-  .hint-ghost {
+  .tutorial-hint-ghost {
     width: 62px;
     height: 62px;
   }

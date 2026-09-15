@@ -72,8 +72,7 @@ export default function App() {
     finishNodeMove,
     undo,
     reset,
-    toggleHint,
-    clearGameHint,
+    clearTutorialHint,
   } = useGameState()
 
   useEffect(() => {
@@ -195,7 +194,7 @@ export default function App() {
             onMove={updateNodePosition}
             onFinishMove={finishNodeMove}
             onStartMove={(nodeId) => {
-              clearGameHint()
+              clearTutorialHint()
               void nodeId
             }}
           />
@@ -206,9 +205,7 @@ export default function App() {
         <Controls
           canUndo={game.moveHistory.length > 0}
           disabled={game.status === 'won' || isTutorialWin}
-          hintActive={Boolean(game.hint)}
           onUndo={undo}
-          onHint={toggleHint}
           onReset={reset}
         />
       </main>
